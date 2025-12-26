@@ -1,0 +1,78 @@
+.chaos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-auto-rows: 250px;
+    gap: 1.5rem;
+    grid-auto-flow: dense;
+    /* Key for filling gaps */
+    padding: 1rem 0;
+}
+
+.chaos-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    width: 100%;
+    height: 100%;
+}
+
+.chaos-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+
+.chaos-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.chaos-item:hover .chaos-overlay {
+    opacity: 1;
+}
+
+.chaos-item:hover img {
+    transform: scale(1.1);
+}
+
+.chaos-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 35px rgba(0, 0, 0, 0.22);
+    z-index: 2;
+}
+
+/* Size utility classes */
+.chaos-item.wide {
+    grid-column: span 2;
+}
+
+.chaos-item.tall {
+    grid-row: span 2;
+}
+
+.chaos-item.big {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .chaos-grid {
+        grid-template-columns: 1fr;
+        /* Single column on mobile */
+        grid-auto-rows: 250px;
+        gap: 1rem;
+    }
+
+    .chaos-item.wide,
+    .chaos-item.big {
+        grid-column: span 1;
+        /* Reset spans on mobile */
+    }
+}

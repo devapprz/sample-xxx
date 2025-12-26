@@ -1,0 +1,38 @@
+<section id="packages" class="bg-off-white">
+    <div class="section-padding">
+        <div class="section-title">
+            <h2 data-i18n="packages.title">Pilihan Paket Favorit</h2>
+            <p data-i18n="packages.subtitle">Temukan paket yang pas untuk kebutuhan acara Anda</p>
+        </div>
+
+        <div class="tabs-container">
+            <button class="tab-btn active" onclick="openTab(event, 'Wedding')" data-i18n="packages.tab.wedding">💍
+                Pernikahan</button>
+            <button class="tab-btn" onclick="openTab(event, 'Corporate')" data-i18n="packages.tab.corporate">🤝
+                Korporat</button>
+            <button class="tab-btn" onclick="openTab(event, 'Social')" data-i18n="packages.tab.social">🎉 Acara
+                Pribadi</button>
+        </div>
+
+        <!-- Tab Content: Wedding -->
+        <div id="Wedding" class="tab-content" style="display: block;">
+            <div id="pkg-wedding-container" class="package-grid">
+                <!-- Injected by main.js -->
+            </div>
+        </div>
+
+        <!-- Tab Content: Corporate -->
+        <div id="Corporate" class="tab-content">
+            <div id="pkg-corporate-container" class="package-grid">
+                <!-- Injected by main.js -->
+            </div>
+        </div>
+
+        <!-- Tab Content: Social -->
+        <div id="Social" class="tab-content">
+            <div id="pkg-social-container" class="package-grid">
+                <!-- Injected by main.js -->
+            </div>
+        </div>
+    </div>
+</section>
