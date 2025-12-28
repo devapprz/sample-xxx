@@ -12,6 +12,7 @@ const sections = [
     { id: 'features-container', file: 'assets/page/features.html' },
     { id: 'stats-container', file: 'assets/page/stats.html' },
     { id: 'about-container', file: 'assets/page/about.html' },
+    { id: 'history-container', file: 'assets/page/history.html' },
     { id: 'services-container', file: 'assets/page/services.html' },
     { id: 'menu-container', file: 'assets/page/menu.html' },
     { id: 'packages-container', file: 'assets/page/packages.html' },
@@ -217,7 +218,7 @@ function applyConfig(container = document) {
             // div.setAttribute('data-wow-delay', `${index * 0.1}s`);
             div.innerHTML = `
                 <img src="${item.image}" alt="${item.title}" loading="lazy">
-                <div class="menu-overlay">
+                <div class="menu-card-overlay">
                     <h3>${item.title}</h3>
                     <p>${item.desc}</p>
                 </div>
@@ -358,6 +359,7 @@ function applyConfig(container = document) {
                 <div class="service-icon">${item.icon}</div>
                 <h3>${item.title}</h3>
                 <p>${item.desc}</p>
+                <div class="service-link" onclick="window.openServicePopup(${index})" data-i18n="services.learn_more">Selengkapnya <i class="fas fa-arrow-right"></i></div>
             `;
             servicesContainer.appendChild(div);
         });
@@ -369,11 +371,37 @@ function applyConfig(container = document) {
         statsContainer.innerHTML = '';
         CONFIG.stats.forEach((item) => {
             const div = document.createElement('div');
+            div.className = 'stat-item wow animate__animated animate__fadeInUp';
             div.innerHTML = `
                 <div class="stat-number">${item.number}</div>
                 <p>${item.label}</p>
             `;
             statsContainer.appendChild(div);
+        });
+    }
+
+    // 10. Render History Timeline
+    const historyContainer = container.querySelector('#history-timeline-container');
+    if (historyContainer && CONFIG.history) {
+        historyContainer.innerHTML = '';
+        CONFIG.history.forEach((item, index) => {
+            const div = document.createElement('div');
+            const animationClass = window.innerWidth >= 768
+                ? (index % 2 === 0 ? 'animate__fadeInLeft' : 'animate__fadeInRight')
+                : 'animate__fadeInUp';
+
+            div.className = `timeline-item wow animate__animated ${animationClass}`;
+            if (index > 0) div.setAttribute('data-wow-delay', `${index * 0.1}s`);
+
+            div.innerHTML = `
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-year">${item.year}</span>
+                    <h3>${item.title}</h3>
+                    <p>${item.desc}</p>
+                </div>
+            `;
+            historyContainer.appendChild(div);
         });
     }
 
@@ -881,3 +909,54 @@ async function loadAll() {
 }
 
 document.addEventListener('DOMContentLoaded', loadAll);
+
+// Service Detail Popup Logic
+window.openServicePopup = function (index) {
+    const service = CONFIG.services[index];
+    if (!service) return;
+
+    const modalContainer = document.getElementById('service-modal-container');
+    if (!modalContainer) return;
+
+    modalContainer.innerHTML = `
+        <div id="service-modal" class="service-modal-overlay">
+            <div class="service-modal-content animate__animated animate__zoomIn">
+                <button class="service-modal-close" onclick="window.closeServicePopup()">&times;</button>
+                <div class="service-modal-body">
+                    <div class="service-modal-image">
+                        <img src="${service.image}" alt="${service.title}">
+                    </div>
+                    <div class="service-modal-text">
+                        <div class="service-modal-icon">${service.icon}</div>
+                        <h2>${service.title}</h2>
+                        <p class="service-long-desc">${service.longDesc}</p>
+                        <a href="#contact" class="hero-btn" onclick="window.closeServicePopup()" data-i18n="hero.order">Pesan Sekarang</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    document.body.style.overflow = 'hidden'; // Prevent scroll
+
+    // Close on overlay click
+    const overlay = document.getElementById('service-modal');
+    overlay.onclick = function (e) {
+        if (e.target === overlay) window.closeServicePopup();
+    };
+};
+
+window.closeServicePopup = function () {
+    const modal = document.getElementById('service-modal');
+    if (modal) {
+        modal.classList.add('animate__fadeOut');
+        const content = modal.querySelector('.service-modal-content');
+        if (content) {
+            content.classList.replace('animate__zoomIn', 'animate__zoomOut');
+        }
+        setTimeout(() => {
+            document.getElementById('service-modal-container').innerHTML = '';
+            document.body.style.overflow = '';
+        }, 300);
+    }
+};

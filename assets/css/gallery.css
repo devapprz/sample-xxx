@@ -1,3 +1,11 @@
+#gallery .section-padding {
+    padding-bottom: 0;
+}
+
+#gallery .section-title {
+    margin-bottom: 1.5rem;
+}
+
 .slider-container {
     position: relative;
     max-width: 1000px;
@@ -79,7 +87,9 @@
     border-radius: 3px 0 0 3px;
 }
 
-background-color: var(--primary-color);
+.prev:hover,
+.next:hover {
+    background-color: var(--primary-color);
 }
 
 @media (max-width: 768px) {
