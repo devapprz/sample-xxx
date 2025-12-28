@@ -211,7 +211,7 @@ function applyConfig(container = document) {
     const menuContainer = container.querySelector('#menu-grid-container');
     if (menuContainer && CONFIG.menu_items.length > 0) {
         menuContainer.innerHTML = '';
-        CONFIG.menu_items.forEach((item) => {
+        CONFIG.menu_items.forEach((item, index) => {
             const div = document.createElement('div');
             div.className = 'menu-item wow animate__animated animate__fadeInUp';
             // Simple delay stagger
@@ -219,8 +219,8 @@ function applyConfig(container = document) {
             div.innerHTML = `
                 <img src="${item.image}" alt="${item.title}" loading="lazy">
                 <div class="menu-card-overlay">
-                    <h3>${item.title}</h3>
-                    <p>${item.desc}</p>
+                    <h3 data-i18n="menu.item${index}.title">${item.title}</h3>
+                    <p data-i18n="menu.item${index}.desc">${item.desc}</p>
                 </div>
             `;
             menuContainer.appendChild(div);
@@ -340,8 +340,8 @@ function applyConfig(container = document) {
             div.className = 'feature-card wow animate__animated animate__fadeInUp';
             div.innerHTML = `
                 <div class="feature-icon">${item.icon}</div>
-                <h3>${item.title}</h3>
-                <p>${item.desc}</p>
+                <h3 data-i18n="features.${item.id}.title">${item.title}</h3>
+                <p data-i18n="features.${item.id}.desc">${item.desc}</p>
             `;
             featuresContainer.appendChild(div);
         });
@@ -351,14 +351,16 @@ function applyConfig(container = document) {
     const servicesContainer = container.querySelector('#services-grid-container');
     if (servicesContainer && CONFIG.services) {
         servicesContainer.innerHTML = '';
-        CONFIG.services.forEach((item, index) => {
+        CONFIG.services.forEach((service, index) => {
             const div = document.createElement('div');
             div.className = 'service-card wow animate__animated animate__fadeInUp';
-            if (index > 0) div.setAttribute('data-wow-delay', `${index * 0.2}s`);
+            if (index === 1) div.setAttribute('data-wow-delay', '0.2s');
+            if (index === 2) div.setAttribute('data-wow-delay', '0.4s');
+
             div.innerHTML = `
-                <div class="service-icon">${item.icon}</div>
-                <h3>${item.title}</h3>
-                <p>${item.desc}</p>
+                <div class="service-icon">${service.icon}</div>
+                <h3 data-i18n="services.${service.id}.title">${service.title}</h3>
+                <p data-i18n="services.${service.id}.desc">${service.desc}</p>
                 <div class="service-link" onclick="window.openServicePopup(${index})" data-i18n="services.learn_more">Selengkapnya <i class="fas fa-arrow-right"></i></div>
             `;
             servicesContainer.appendChild(div);
@@ -369,12 +371,17 @@ function applyConfig(container = document) {
     const statsContainer = container.querySelector('#stats-grid-container');
     if (statsContainer && CONFIG.stats) {
         statsContainer.innerHTML = '';
-        CONFIG.stats.forEach((item) => {
+        CONFIG.stats.forEach((item, index) => {
             const div = document.createElement('div');
             div.className = 'stat-item wow animate__animated animate__fadeInUp';
+            // Assuming keys like stats.years, stats.events, etc. 
+            // Better to use a mapping or specific keys if they exist in translations.js
+            // Looking at translations.js, it uses stats.years, stats.events, etc.
+            // I'll map them based on index or just use data-i18n if possible.
+            // Actually, item.id in CONFIG.stats would be best. Let's check config.js.
             div.innerHTML = `
                 <div class="stat-number">${item.number}</div>
-                <p>${item.label}</p>
+                <p data-i18n="stats.${item.id}">${item.label}</p>
             `;
             statsContainer.appendChild(div);
         });
@@ -397,8 +404,8 @@ function applyConfig(container = document) {
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
                     <span class="timeline-year">${item.year}</span>
-                    <h3>${item.title}</h3>
-                    <p>${item.desc}</p>
+                    <h3 data-i18n="history.${index}.title">${item.title}</h3>
+                    <p data-i18n="history.${index}.desc">${item.desc}</p>
                 </div>
             `;
             historyContainer.appendChild(div);
@@ -412,15 +419,15 @@ function applyConfig(container = document) {
         CONFIG.process.forEach((item, index) => {
             const div = document.createElement('div');
             div.className = 'process-step wow animate__animated animate__fadeInUp';
-            div.setAttribute('data-wow-delay', `${(index + 1) * 0.1}s`);
+            if (index > 0) div.setAttribute('data-wow-delay', `${index * 0.2}s`);
             div.innerHTML = `
                 <div class="step-icon">
                     <i class="${item.icon}"></i>
                     <div class="step-number">${item.number}</div>
                 </div>
                 <div class="step-content">
-                    <h3>${item.title}</h3>
-                    <p>${item.desc}</p>
+                    <h3 data-i18n="process.step${index + 1}.title">${item.title}</h3>
+                    <p data-i18n="process.step${index + 1}.desc">${item.desc}</p>
                 </div>
             `;
             processContainer.appendChild(div);
@@ -440,7 +447,7 @@ function applyConfig(container = document) {
             return (parts[0][0] + parts[1][0]).toUpperCase();
         };
 
-        const renderTestimonial = (item) => {
+        const renderTestimonial = (item, index) => {
             const div = document.createElement('div');
             div.className = 'testimonial-card wow animate__animated animate__fadeInUp';
 
@@ -465,15 +472,15 @@ function applyConfig(container = document) {
                     <div class="testimonial-avatar">${avatarContent}</div>
                 </div>
                 <div class="testimonial-content">
-                    <p>${item.text}</p>
-                    <div class="testimonial-author">— ${item.author}</div>
+                    <p data-i18n="testimonials.${index + 1}.text">${item.text}</p>
+                    <div class="testimonial-author" data-i18n="testimonials.${index + 1}.author">— ${item.author}</div>
                 </div>
             `;
             return div;
         };
 
-        CONFIG.testimonials.forEach((item) => {
-            testimonialsContainer.appendChild(renderTestimonial(item));
+        CONFIG.testimonials.forEach((item, index) => {
+            testimonialsContainer.appendChild(renderTestimonial(item, index));
         });
 
 
@@ -509,15 +516,15 @@ function applyConfig(container = document) {
                 const isImage = item.icon.includes('/') || item.icon.includes('.');
                 const iconContent = isImage
                     ? `<img src="${item.icon}" alt="${item.title}" style="width: 100%; height: 100%; object-fit: contain;">`
-                    : `<div class="cert-icon">${item.icon}</div>`;
+                    : `<div class="cert-icon"><i class="${item.icon}"></i></div>`;
                 div.innerHTML = `
                 <div class="cert-badge">${item.badge}</div>
                 <div class="cert-icon-wrapper">${iconContent}</div>
                 <div class="cert-content">
-                    <h4>${item.title}</h4>
+                    <h4 data-i18n="certifications.${item.id}.title">${item.title}</h4>
                     <div class="cert-number">${item.number}</div>
                     <p class="cert-issuer">${item.issuer}</p>
-                    <div class="cert-status"><span class="status-dot"></span> Terverifikasi</div>
+                    <div class="cert-status"><span class="status-dot"></span> <span data-i18n="certifications.verified">Terverifikasi</span></div>
                 </div>
             `;
                 certContainer.appendChild(div);
@@ -928,14 +935,17 @@ window.openServicePopup = function (index) {
                     </div>
                     <div class="service-modal-text">
                         <div class="service-modal-icon">${service.icon}</div>
-                        <h2>${service.title}</h2>
-                        <p class="service-long-desc">${service.longDesc}</p>
-                        <a href="#contact" class="hero-btn" onclick="window.closeServicePopup()" data-i18n="hero.order">Pesan Sekarang</a>
+                        <h2 data-i18n="services.${service.id}.title">${service.title}</h2>
+                        <p class="service-long-desc" data-i18n="services.${service.id}.longDesc">${service.longDesc}</p>
+                        <a href="#contact" class="hero-btn" onclick="window.closeServicePopup()" data-i18n="services.modal.order">Pesan Sekarang</a>
                     </div>
                 </div>
             </div>
         </div>
     `;
+
+    // Apply translations to the newly injected modal content
+    applyTranslations(modalContainer);
 
     document.body.style.overflow = 'hidden'; // Prevent scroll
 

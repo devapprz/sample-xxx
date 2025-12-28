@@ -22,9 +22,9 @@ const CONFIG = {
         saturday: "Sab: 10:00 - 16:00"
     },
     certifications: [
-        { title: "Sertifikasi Halal", number: "ID31110000326470622", issuer: "Majelis Ulama Indonesia", icon: "🕌", badge: "Official" },
-        { title: "Sertifikat Laik Hygiene", number: "443.51/2923/Dinkes/2023", issuer: "Dinas Kesehatan DKI Jakarta", icon: "🛡️", badge: "Health" },
-        { title: "Anggota Resmi", number: "018/D.PD/APJI/DKI/2023", issuer: "Asosiasi Perusahaan Jasaboga Indonesia", icon: "🤝", badge: "Member" }
+        { id: "halal", title: "Halal MUI", number: "No. 123456789", issuer: "MUI Indonesia", icon: "https://upload.wikimedia.org/wikipedia/commons/e/ee/Logo_Halal_Indonesia.png", badge: "Kualitas" },
+        { id: "hygiene", title: "Laik Hygiene", number: "Dinkes DKI Jakarta", issuer: "Kemenkes RI", icon: "fas fa-shield-virus", badge: "Keamanan" },
+        { id: "apji", title: "Anggota APJI", number: "Asosiasi Jasa Boga", issuer: "APJI Pusat", icon: "fas fa-handshake", badge: "Profesional" }
     ],
     trusted_by: [
         { name: "Indofood", url: "https://upload.wikimedia.org/wikipedia/commons/2/2d/Indofood_logo-id.svg" },
@@ -39,9 +39,15 @@ const CONFIG = {
         { image: "assets/img/hero/hero_carousel_3_corporate_lunch_box.png", alt: "Corporate Lunch Box" }
     ],
     menu_items: [
-        { title: "Organic Green Bowls", desc: "Sayuran segar langsung dari kebun dengan saus vinaigrette.", image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=50&fm=webp" },
-        { title: "Prime Rib Platter", desc: "Daging iga panggang lambat dengan rempah pilihan.", image: "https://images.unsplash.com/photo-1606787366850-de6330128bfc?auto=format&fit=crop&w=600&q=50&fm=webp" },
-        { title: "Artisan Desserts", desc: "Mousse dan kue-kue buatan tangan yang lezat.", image: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=600&q=50&fm=webp" }
+        { title: "Organic Green Bowls", desc: "Sayuran segar langsung dari kebun dengan saus vinaigrette.", image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=60" },
+        { title: "Prime Rib Platter", desc: "Daging iga panggang lambat dengan rempah pilihan.", image: "https://images.unsplash.com/photo-1558030006-45ef64fabfa0?auto=format&fit=crop&w=800&q=60" },
+        { title: "Artisan Desserts", desc: "Mousse dan kue-kue buatan tangan yang lezat.", image: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=800&q=60" },
+        { title: "Nasi Bali Premium", desc: "Nasi campur Bali lengkap dengan sate lilit dan sambal matah.", image: "https://images.unsplash.com/photo-1541518763669-279f00ed42e5?auto=format&fit=crop&w=800&q=60" },
+        { title: "Salmon Steak en Croûte", desc: "Salmon segar yang dipanggang dalam kulit pastry renyah.", image: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=800&q=60" },
+        { title: "Beef Wellington", desc: "Fillet mignon dengan duxelles jamur dalam pastry emas.", image: "https://images.unsplash.com/photo-1518133910546-b6c2fb7d79e3?auto=format&fit=crop&w=800&q=60" },
+        { title: "Tumpeng Nusantara", desc: "Sajian tumpeng tradisional dengan lauk pauk khas Indonesia.", image: "https://images.unsplash.com/photo-1581447124352-4752c1fe4154?auto=format&fit=crop&w=800&q=60" },
+        { title: "Dim Sum Platter", desc: "Variasi dim sum artisan yang dikukus hangat.", image: "https://images.unsplash.com/photo-1496116216417-63f4306c586e?auto=format&fit=crop&w=800&q=60" },
+        { title: "Premium Fruit Tart", desc: "Pencuci mulut buah-buahan segar dengan krim vanilla lembut.", image: "https://images.unsplash.com/photo-1519915028121-7d3463d20b13?auto=format&fit=crop&w=800&q=60" }
     ],
     packages: {
         wedding: [
@@ -82,10 +88,10 @@ const CONFIG = {
     ],
 
     features: [
-        { icon: "🌿", title: "Bahan Segar", desc: "Bahan premium dari supplier lokal terpercaya." },
-        { icon: "👨‍🍳", title: "Koki Profesional", desc: "Tim dapur berpengalaman event kecil hingga besar." },
-        { icon: "⏱️", title: "Layanan Tepat Waktu", desc: "Setup rapi dan tepat waktu tanpa kompromi kualitas." },
-        { icon: "✨", title: "Menu Kustom", desc: "Menu fleksibel sesuai tema dan kebutuhan klien." }
+        { id: "fresh", icon: "🌿", title: "Bahan Segar", desc: "Bahan premium dari supplier lokal terpercaya." },
+        { id: "chef", icon: "👨‍🍳", title: "Koki Profesional", desc: "Tim dapur berpengalaman event kecil hingga besar." },
+        { id: "time", icon: "⏱️", title: "Layanan Tepat Waktu", desc: "Setup rapi dan tepat waktu tanpa kompromi kualitas." },
+        { id: "custom", icon: "✨", title: "Menu Kustom", desc: "Menu fleksibel sesuai tema dan kebutuhan klien." }
     ],
     services: [
         {
@@ -133,10 +139,10 @@ const CONFIG = {
         }
     ],
     stats: [
-        { number: "14+", label: "Tahun Pengalaman" },
-        { number: "1.200+", label: "Event Terselenggara" },
-        { number: "150K+", label: "Tamu Terlayani" },
-        { number: "98%", label: "Kepuasan Klien" }
+        { id: "years", number: "14+", label: "Tahun Pengalaman" },
+        { id: "events", number: "1.200+", label: "Event Terselenggara" },
+        { id: "guests", number: "150K+", label: "Tamu Terlayani" },
+        { id: "satisfaction", number: "98%", label: "Kepuasan Klien" }
     ],
     process: [
         { icon: "fas fa-comments", number: "1", title: "Konsultasi", desc: "Diskusi gratis mengenai kebutuhan, tanggal, dan anggaran acara Anda." },
