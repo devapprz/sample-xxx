@@ -159,22 +159,52 @@
         grid-template-columns: repeat(3, 1fr);
         grid-auto-rows: minmax(100px, auto);
         gap: 2px;
-        /* Typical Instagram gap */
         padding: 1rem 0;
         margin-left: -1.5rem;
-        /* Offset parent .section-padding */
         margin-right: -1.5rem;
         width: calc(100% + 3rem);
     }
 
     .chaos-item {
         border-radius: 0;
-        /* Square/Flat look */
         box-shadow: none;
         aspect-ratio: 1 / 1;
+    }
+
+    /* Hide items beyond 6 on mobile */
+    .chaos-item.hide-extra {
+        display: none;
+    }
+
+    .chaos-item.show-all {
+        display: block !important;
     }
 
     .chaos-item:hover {
         transform: none;
     }
+}
+
+.show-more-moments {
+    display: none;
+    margin: 2rem auto 0;
+    padding: 0.8rem 2rem;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .show-more-moments {
+        display: block;
+    }
+}
+
+.show-more-moments:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
 }

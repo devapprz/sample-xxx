@@ -158,8 +158,7 @@
 
 .hero-text {
     text-align: center;
-    order: 2;
-    /* Text below image on mobile usually, or keep standard Flow */
+    order: 1;
 }
 
 .hero h1 {
@@ -226,8 +225,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    order: 1;
-    /* Image first on mobile? Or text? Let's keep Text first on Desktop, Image first on Mobile usually looks good but let's stick to DOM order (Text then Image) which converts to stack */
+    order: 2;
 }
 
 /* Desktop layout override later */

@@ -38,7 +38,7 @@
     position: absolute;
     left: 21px;
     /* Center of the 2px line at left:20px */
-    top: 5px;
+    top: 15px;
     width: 18px;
     height: 18px;
     background: white;
@@ -88,6 +88,33 @@
     color: var(--text-muted);
     line-height: 1.6;
     margin: 0;
+}
+
+/* Mobile compact view */
+@media (max-width: 767px) {
+    .timeline-container {
+        margin-top: 2rem;
+    }
+
+    .timeline-item {
+        margin-bottom: 2rem;
+        padding-left: 40px;
+    }
+
+    .timeline-content {
+        padding: 1.2rem;
+    }
+
+    .timeline-container::before {
+        left: 15px;
+    }
+
+    .timeline-dot {
+        left: 16px;
+        width: 14px;
+        height: 14px;
+        border-width: 3px;
+    }
 }
 
 /* Desktop Styles */

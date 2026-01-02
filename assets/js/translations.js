@@ -194,7 +194,8 @@ const translations = {
         "promo.later": "Nanti saja, terima kasih",
 
         "cookie.text": "Kami menggunakan cookies untuk meningkatkan pengalaman Anda di website ini.",
-        "cookie.btn": "Saya Mengerti"
+        "cookie.btn": "Saya Mengerti",
+        "common.swipe_hint": "Geser untuk selengkapnya"
     },
     en: {
         "nav.home": "Home",
@@ -388,6 +389,7 @@ const translations = {
         "promo.later": "Maybe later, thanks",
 
         "cookie.text": "We use cookies to ensure you get the best experience on our website.",
-        "cookie.btn": "I Understand"
+        "cookie.btn": "I Understand",
+        "common.swipe_hint": "Slide for more"
     }
 };

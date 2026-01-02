@@ -326,6 +326,7 @@ function applyConfig(container = document) {
         CONFIG.faq.forEach((item, index) => {
             const details = document.createElement('details');
             details.className = 'faq-item wow animate__animated animate__fadeInUp';
+            if (index >= 3) details.classList.add('hide-extra');
             details.setAttribute('data-wow-delay', `${index * 0.1}s`);
             details.innerHTML = `
                 <summary>${item.q}</summary>
@@ -333,15 +334,32 @@ function applyConfig(container = document) {
             `;
             faqContainer.appendChild(details);
         });
+
+        // Add Show More button
+        const showMoreFaqBtn = document.createElement('button');
+        showMoreFaqBtn.className = 'show-more-faq';
+        showMoreFaqBtn.textContent = 'Lihat FAQ Lengkap';
+        showMoreFaqBtn.onclick = function () {
+            faqContainer.querySelectorAll('.hide-extra').forEach(el => el.classList.add('show-all'));
+            this.style.display = 'none';
+        };
+        faqContainer.parentNode.appendChild(showMoreFaqBtn);
     }
 
     // 7. Render Features
     const featuresContainer = container.querySelector('#features-grid-container');
     if (featuresContainer && CONFIG.features) {
+        // Add swipe hint for mobile
+        featuresContainer.insertAdjacentHTML('beforebegin', `
+            <div class="swipe-hint" data-i18n="common.swipe_hint">
+                <i class="fas fa-hand-pointer"></i> Geser untuk selengkapnya <i class="fas fa-arrow-right"></i>
+            </div>
+        `);
         featuresContainer.innerHTML = '';
         CONFIG.features.forEach((item) => {
             const div = document.createElement('div');
-            div.className = 'feature-card wow animate__animated animate__fadeInUp';
+            // Remove wow on mobile to prevent visibility issues with horizontal scroll
+            div.className = 'feature-card';
             div.innerHTML = `
                 <div class="feature-icon">${item.icon}</div>
                 <h3 data-i18n="features.${item.id}.title">${item.title}</h3>
@@ -354,13 +372,17 @@ function applyConfig(container = document) {
     // 8. Render Services
     const servicesContainer = container.querySelector('#services-grid-container');
     if (servicesContainer && CONFIG.services) {
+        // Add swipe hint for mobile
+        servicesContainer.insertAdjacentHTML('beforebegin', `
+            <div class="swipe-hint" data-i18n="common.swipe_hint">
+                <i class="fas fa-hand-pointer"></i> Geser untuk selengkapnya <i class="fas fa-arrow-right"></i>
+            </div>
+        `);
         servicesContainer.innerHTML = '';
         CONFIG.services.forEach((service, index) => {
             const div = document.createElement('div');
-            div.className = 'service-card wow animate__animated animate__fadeInUp';
-            if (index === 1) div.setAttribute('data-wow-delay', '0.2s');
-            if (index === 2) div.setAttribute('data-wow-delay', '0.4s');
-
+            // Remove wow on mobile to prevent visibility issues
+            div.className = 'service-card';
             div.innerHTML = `
                 <div class="service-icon">${service.icon}</div>
                 <h3 data-i18n="services.${service.id}.title">${service.title}</h3>
@@ -416,14 +438,20 @@ function applyConfig(container = document) {
         });
     }
 
-    // 10. Render Process
+    // 11. Render Process
     const processContainer = container.querySelector('#process-steps-container');
     if (processContainer && CONFIG.process) {
+        // Add swipe hint for mobile
+        processContainer.insertAdjacentHTML('beforebegin', `
+            <div class="swipe-hint" data-i18n="common.swipe_hint">
+                <i class="fas fa-hand-pointer"></i> Geser untuk selengkapnya <i class="fas fa-arrow-right"></i>
+            </div>
+        `);
         processContainer.innerHTML = '';
         CONFIG.process.forEach((item, index) => {
             const div = document.createElement('div');
-            div.className = 'process-step wow animate__animated animate__fadeInUp';
-            if (index > 0) div.setAttribute('data-wow-delay', `${index * 0.2}s`);
+            // Remove wow on mobile to prevent visibility issues
+            div.className = 'process-step';
             div.innerHTML = `
                 <div class="step-icon">
                     <i class="${item.icon}"></i>

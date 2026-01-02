@@ -23,3 +23,30 @@
     margin-bottom: 1rem;
     color: var(--primary-color);
 }
+
+@media (max-width: 768px) {
+    .features-grid {
+        display: flex;
+        flex-wrap: nowrap;
+        width: calc(100% + 3rem);
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 1.5rem;
+        padding: 1rem 0;
+        margin-left: -1.5rem;
+        margin-right: -1.5rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .features-grid::-webkit-scrollbar {
+        display: none;
+    }
+
+    .feature-card {
+        flex: 0 0 260px;
+        scroll-snap-align: center;
+    }
+}

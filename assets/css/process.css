@@ -8,9 +8,23 @@
 
 @media (max-width: 1100px) {
     .process-steps {
-        grid-template-columns: 1fr;
-        gap: 0;
-        padding-left: 2rem;
+        display: flex;
+        flex-wrap: nowrap;
+        width: calc(100% + 3rem);
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 1.5rem;
+        padding: 1rem 0;
+        margin-left: -1.5rem;
+        margin-right: -1.5rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .process-steps::-webkit-scrollbar {
+        display: none;
     }
 }
 
@@ -23,10 +37,10 @@
 
 @media (max-width: 1100px) {
     .process-step {
-        text-align: left;
-        display: flex;
-        align-items: flex-start;
-        gap: 1.5rem;
+        flex: 0 0 280px;
+        scroll-snap-align: center;
+        text-align: center;
+        display: block;
         padding: 1.5rem 0;
     }
 }
@@ -57,7 +71,7 @@
     .step-icon {
         width: 60px;
         height: 60px;
-        margin: 0;
+        margin: 0 auto 1.5rem;
         font-size: 1.4rem;
     }
 }
@@ -117,19 +131,10 @@
     }
 }
 
-/* Vertical connecting line for mobile/tablet */
+/* Hide vertical connecting line for horizontal scroll */
 @media (max-width: 1100px) {
     .process-step:not(:last-child)::after {
-        content: '';
-        position: absolute;
-        left: 30px;
-        /* Center of 60px icon */
-        top: calc(1.5rem + 30px);
-        /* 1.5rem padding + 30px half-height */
-        width: 2px;
-        height: 100%;
-        background: rgba(44, 95, 45, 0.1);
-        z-index: 0;
+        display: none;
     }
 }
 
